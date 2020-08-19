@@ -34,7 +34,7 @@ module.exports = {
     }
   },
 
-  createWorkout: (req, res) => {
+  createWorkout: async (req, res) => {
     workout
       .create(req.body)
       .then((createWorkout) => {
@@ -44,12 +44,9 @@ module.exports = {
       .catch((err) => res.send(err));
   },
 
-  getWorkoutsInRange: async (req, res) => {
-    try {
-      const workoutsInRange = await workout.find({});
-      res.send(workoutsInRange);
-    } catch (err) {
-      res.send(err);
-    }
+  getWorkoutsInRange: (req, res) => {
+    Fitness.find()
+      .then((workoutRange) => res.send(workoutRange))
+      .catch((err) => res.send(err));
   },
 };
